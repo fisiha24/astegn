@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - ASTEGN AI</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container { max-width: 500px; width: 100%; padding: 20px; }
+        .card {
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(12px);
+            padding: 35px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #f093fb, #f5576c, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+        .subtitle { text-align: center; color: rgba(255,255,255,0.4); margin-bottom: 25px; font-size: 0.95rem; }
+        .flash {
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            background: rgba(72,187,120,0.2);
+            border: 1px solid rgba(72,187,120,0.3);
+            color: #9ae6b4;
+            text-align: center;
+        }
+        form { display: flex; flex-direction: column; gap: 15px; }
+        input {
+            padding: 14px 18px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            font-size: 16px;
+            background: rgba(255,255,255,0.05);
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        input::placeholder { color: rgba(255,255,255,0.3); }
+        input:focus {
+            outline: none;
+            border-color: rgba(79,172,254,0.4);
+            background: rgba(255,255,255,0.08);
+        }
+        .btn {
+            padding: 14px;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn:hover { transform: scale(1.02); box-shadow: 0 8px 30px rgba(79,172,254,0.3); }
+        .back { text-align: center; margin-top: 20px; }
+        .back a { color: rgba(255,255,255,0.4); text-decoration: none; font-weight: 500; transition: all 0.3s ease; }
+        .back a:hover { color: #ffffff; }
+        @media (max-width: 500px) {
+            .card { padding: 25px; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>📝 Register</h1>
+            <p class="subtitle">Create your account to get started with ASTEGN AI</p>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST">
+                <input type="text" name="fullname" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="Email Address" required>
+                <input type="tel" name="phone" placeholder="Phone Number">
+                <input type="text" name="school" placeholder="School Name">
+                <input type="number" name="grade" placeholder="Grade (e.g., 7)" min="1" max="12">
+                <button type="submit" class="btn">Register Now</button>
+            </form>
+
+            <div class="back">
+                <a href="/">🏠 Back to Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

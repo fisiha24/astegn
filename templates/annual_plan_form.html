@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annual Plan - ASTEGN AI</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            color: #ffffff;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        nav {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            background: rgba(255,255,255,0.06);
+            padding: 15px 25px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        nav a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: 0.3s;
+            font-size: 0.95rem;
+        }
+        nav a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        .card {
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #f093fb, #f5576c, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle { color: rgba(255,255,255,0.5); margin-bottom: 25px; }
+        fieldset {
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        legend { font-weight: bold; color: #4facfe; padding: 0 10px; }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .form-grid input, .form-grid textarea {
+            padding: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            font-size: 15px;
+            width: 100%;
+        }
+        .form-grid input::placeholder, .form-grid textarea::placeholder { color: rgba(255,255,255,0.3); }
+        .form-grid input:focus, .form-grid textarea:focus {
+            outline: none;
+            border-color: rgba(79,172,254,0.4);
+            background: rgba(255,255,255,0.08);
+        }
+        .form-grid textarea { resize: vertical; min-height: 60px; }
+        .full-width { grid-column: span 2; }
+        .monthly-entry {
+            background: rgba(255,255,255,0.03);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .monthly-entry input, .monthly-entry textarea {
+            padding: 10px;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 6px;
+            background: rgba(255,255,255,0.04);
+            color: #fff;
+            font-size: 14px;
+            width: 100%;
+        }
+        .monthly-entry input::placeholder, .monthly-entry textarea::placeholder { color: rgba(255,255,255,0.3); }
+        .monthly-entry textarea { resize: vertical; min-height: 50px; }
+        .btn-add {
+            padding: 10px 20px;
+            background: rgba(79,172,254,0.2);
+            color: #4facfe;
+            border: 1px solid rgba(79,172,254,0.3);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-add:hover { background: rgba(79,172,254,0.3); }
+        .btn-remove {
+            padding: 6px 12px;
+            background: rgba(231,76,60,0.2);
+            color: #e74c3c;
+            border: 1px solid rgba(231,76,60,0.3);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-remove:hover { background: rgba(231,76,60,0.3); }
+        .btn {
+            padding: 14px 30px;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn:hover { transform: scale(1.02); box-shadow: 0 8px 30px rgba(79,172,254,0.3); }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px 0;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.85rem;
+        }
+        .footer span {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        @media (max-width: 700px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+            .monthly-entry { grid-template-columns: 1fr; }
+            .card { padding: 20px; }
+            h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="/">🏠 Home</a>
+            <a href="/about">ℹ️ About</a>
+            <a href="/contact">📧 Contact</a>
+            <a href="/register">📝 Register</a>
+        </nav>
+
+        <div class="card">
+            <h1>📅 Annual Lesson Plan</h1>
+            <p class="subtitle">Create a complete annual lesson plan with all details.</p>
+
+            <form method="POST">
+                <!-- Basic Information -->
+                <fieldset>
+                    <legend>School Information</legend>
+                    <div class="form-grid">
+                        <input type="text" name="school_name" placeholder="School Name" required>
+                        <input type="text" name="teacher_name" placeholder="Teacher Name" required>
+                        <input type="text" name="subject" placeholder="Subject" required>
+                        <input type="number" name="grade" placeholder="Grade" required>
+                        <input type="text" name="section" placeholder="Section" required>
+                        <input type="number" name="year" placeholder="Academic Year" required>
+                        <input type="number" name="total_days" placeholder="Total Working Days" required>
+                    </div>
+                </fieldset>
+
+                <!-- Unit Details -->
+                <fieldset>
+                    <legend>Unit Details</legend>
+                    <div class="form-grid">
+                        <input type="number" name="unit_number" placeholder="Unit Number" required>
+                        <input type="text" name="unit_title" placeholder="Unit Title" required>
+                        <textarea name="unit_objectives" placeholder="General Objectives" class="full-width" rows="3"></textarea>
+                    </div>
+                </fieldset>
+
+                <!-- Monthly Breakdown -->
+                <fieldset>
+                    <legend>Monthly Breakdown</legend>
+                    <div id="monthly-entries">
+                        <div class="monthly-entry">
+                            <input type="text" name="month[]" placeholder="Month" required>
+                            <input type="number" name="week[]" placeholder="Week" required>
+                            <input type="number" name="period[]" placeholder="Periods" required>
+                            <input type="text" name="date_range[]" placeholder="Date Range" required>
+                            <input type="number" name="page[]" placeholder="Page" required>
+                            <textarea name="topics[]" placeholder="Topics" rows="2"></textarea>
+                            <textarea name="objectives[]" placeholder="Objectives" rows="2"></textarea>
+                            <input type="text" name="methodology[]" placeholder="Methodology" required>
+                            <input type="text" name="teaching_aids[]" placeholder="Teaching Aids" required>
+                            <input type="text" name="evaluation[]" placeholder="Evaluation" required>
+                            <button type="button" class="btn-remove" onclick="this.parentElement.remove()">🗑️ Remove</button>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-add" onclick="addMonthlyEntry()"><i>➕</i> Add Month</button>
+                </fieldset>
+
+                <button type="submit" class="btn"><i class="fas fa-save"></i> Create Annual Plan</button>
+            </form>
+        </div>
+
+        <div class="footer">
+            &copy; 2026 <span>ASTEGN AI</span> | Free AI Tutor for Ethiopian Students & Teachers
+        </div>
+    </div>
+
+    <script>
+        function addMonthlyEntry() {
+            const container = document.getElementById('monthly-entries');
+            const entry = document.createElement('div');
+            entry.className = 'monthly-entry';
+            entry.innerHTML = `
+                <input type="text" name="month[]" placeholder="Month" required>
+                <input type="number" name="week[]" placeholder="Week" required>
+                <input type="number" name="period[]" placeholder="Periods" required>
+                <input type="text" name="date_range[]" placeholder="Date Range" required>
+                <input type="number" name="page[]" placeholder="Page" required>
+                <textarea name="topics[]" placeholder="Topics" rows="2"></textarea>
+                <textarea name="objectives[]" placeholder="Objectives" rows="2"></textarea>
+                <input type="text" name="methodology[]" placeholder="Methodology" required>
+                <input type="text" name="teaching_aids[]" placeholder="Teaching Aids" required>
+                <input type="text" name="evaluation[]" placeholder="Evaluation" required>
+                <button type="button" class="btn-remove" onclick="this.parentElement.remove()">🗑️ Remove</button>
+            `;
+            container.appendChild(entry);
+        }
+    </script>
+</body>
+</html>

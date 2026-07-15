@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson Plan - ASTEGN AI</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            color: #ffffff;
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        nav {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            background: rgba(255,255,255,0.06);
+            padding: 15px 25px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        nav a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: 0.3s;
+            font-size: 0.95rem;
+        }
+        nav a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        nav a.active { background: rgba(79,172,254,0.2); color: #4facfe; }
+        .card {
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #f093fb, #f5576c, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle { color: rgba(255,255,255,0.5); margin-bottom: 25px; }
+        .plan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .plan-card {
+            background: rgba(255,255,255,0.04);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: 0.3s;
+        }
+        .plan-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-3px); }
+        .plan-card h3 { color: #4facfe; margin-bottom: 8px; }
+        .plan-card p { color: rgba(255,255,255,0.5); font-size: 0.9rem; }
+        .plan-card .btn {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .plan-card .btn:hover { transform: scale(1.05); box-shadow: 0 6px 25px rgba(79,172,254,0.3); }
+        .divider { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 25px 0; }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px 0;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.85rem;
+        }
+        .footer span {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        @media (max-width: 600px) {
+            .card { padding: 20px; }
+            h1 { font-size: 1.6rem; }
+            .plan-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="/">🏠 Home</a>
+            <a href="/about">ℹ️ About</a>
+            <a href="/contact">📧 Contact</a>
+            <a href="/register">📝 Register</a>
+        </nav>
+
+        <div class="card">
+            <h1>📚 Lesson Plan Manager</h1>
+            <p class="subtitle">Create and manage all types of lesson plans with ASTEGN AI.</p>
+
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin: 20px 0;">
+                <a href="/lesson/annual" style="background: #764ba2; color: white; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: bold;">📅 Annual Plan</a>
+                <a href="/lesson/laboratory" style="background: #27ae60; color: white; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: bold;">🔬 Laboratory Plan</a>
+                <a href="/lesson/daily" style="background: #e67e22; color: white; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: bold;">📋 Daily Plan</a>
+            </div>
+
+            <hr class="divider">
+
+            <h2>📅 Annual Plans</h2>
+            {% if annual_plans %}
+                <div class="plan-grid">
+                    {% for plan in annual_plans %}
+                    <div class="plan-card">
+                        <h3>{{ plan.subject }}</h3>
+                        <p>Grade {{ plan.grade }} {{ plan.section }} | {{ plan.year }}</p>
+                        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.4);">Unit {{ plan.unit_number }}: {{ plan.unit_title }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p style="color: rgba(255,255,255,0.4);">No annual plans yet.</p>
+            {% endif %}
+
+            <hr class="divider">
+
+            <h2>🔬 Laboratory Plans</h2>
+            {% if laboratory_plans %}
+                <div class="plan-grid">
+                    {% for plan in laboratory_plans %}
+                    <div class="plan-card">
+                        <h3>{{ plan.subject }}</h3>
+                        <p>Grade {{ plan.grade }} | {{ plan.year }}</p>
+                        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.4);">{{ plan.experiment_data|length if plan.experiment_data else 0 }} experiments</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p style="color: rgba(255,255,255,0.4);">No laboratory plans yet.</p>
+            {% endif %}
+
+            <hr class="divider">
+
+            <h2>📋 Daily Plans</h2>
+            {% if daily_plans %}
+                <div class="plan-grid">
+                    {% for plan in daily_plans %}
+                    <div class="plan-card">
+                        <h3>{{ plan.subject }}</h3>
+                        <p>Grade {{ plan.grade }} {{ plan.section }}</p>
+                        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.4);">{{ plan.date.strftime('%b %d, %Y') if plan.date else 'No date' }}</p>
+                        <p style="font-size: 0.85rem; color: rgba(255,255,255,0.5);">{{ plan.lesson_topic }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p style="color: rgba(255,255,255,0.4);">No daily plans yet.</p>
+            {% endif %}
+
+            <hr class="divider">
+
+            <div style="margin-top: 20px; background: rgba(79,172,254,0.08); padding: 20px; border-radius: 12px; border: 1px solid rgba(79,172,254,0.1);">
+                <p style="color: rgba(255,255,255,0.6); text-align: center;">
+                    💡 <strong>Tip:</strong> You can also ask ASTEGN AI to generate a lesson plan using the chat!
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            &copy; 2026 <span>ASTEGN AI</span> | Free AI Tutor for Ethiopian Students & Teachers
+        </div>
+    </div>
+</body>
+</html>

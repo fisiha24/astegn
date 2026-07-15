@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ course.name }} - ASTEGN AI</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            color: #ffffff;
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        nav {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            background: rgba(255,255,255,0.06);
+            padding: 15px 25px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        nav a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: 0.3s;
+            font-size: 0.95rem;
+        }
+        nav a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        .card {
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #f093fb, #f5576c, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .course-info { color: rgba(255,255,255,0.6); margin-bottom: 25px; font-size: 1.05rem; }
+        .chat-section {
+            background: rgba(255,255,255,0.04);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .chat-section h2 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #4facfe;
+        }
+        .chat-section .subtitle { color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-bottom: 15px; }
+        #chat-messages {
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            padding: 15px;
+            min-height: 150px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        #chat-messages::-webkit-scrollbar { width: 5px; }
+        #chat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
+        .user-msg {
+            background: rgba(79,172,254,0.15);
+            padding: 10px 15px;
+            margin: 6px 0;
+            border-radius: 10px;
+            text-align: right;
+            border: 1px solid rgba(79,172,254,0.1);
+            color: rgba(255,255,255,0.9);
+        }
+        .ai-msg {
+            background: rgba(245,87,108,0.1);
+            padding: 10px 15px;
+            margin: 6px 0;
+            border-radius: 10px;
+            border: 1px solid rgba(245,87,108,0.08);
+            color: rgba(255,255,255,0.9);
+        }
+        .ai-msg strong { color: #f5576c; }
+        .user-msg strong { color: #4facfe; }
+        .loading {
+            background: rgba(255,255,255,0.04);
+            padding: 10px 15px;
+            margin: 6px 0;
+            border-radius: 10px;
+            color: rgba(255,255,255,0.4);
+            font-style: italic;
+        }
+        .chat-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .chat-input textarea {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            font-size: 15px;
+            resize: vertical;
+            min-height: 45px;
+            max-height: 150px;
+            font-family: inherit;
+            min-width: 200px;
+        }
+        .chat-input textarea::placeholder { color: rgba(255,255,255,0.3); }
+        .chat-input textarea:focus {
+            outline: none;
+            border-color: rgba(79,172,254,0.4);
+            background: rgba(255,255,255,0.08);
+        }
+        .btn-purple {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-purple:hover { transform: scale(1.03); box-shadow: 0 8px 30px rgba(245,87,108,0.3); }
+        .btn-download {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 16px;
+            background: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-download:hover { background: #218838; }
+        .btn-plus {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            padding: 0 12px;
+            border-radius: 30px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-plus:hover { background: rgba(255,255,255,0.15); }
+        .dropdown-container { position: relative; display: inline-block; }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            bottom: 50px;
+            left: 0;
+            background: rgba(30,27,75,0.95);
+            backdrop-filter: blur(16px);
+            border-radius: 12px;
+            padding: 8px 0;
+            min-width: 200px;
+            border: 1px solid rgba(255,255,255,0.1);
+            z-index: 100;
+        }
+        .dropdown-menu.show { display: block; }
+        .dropdown-menu button, .dropdown-menu label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 10px 18px;
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: left;
+            font-family: inherit;
+        }
+        .dropdown-menu button:hover, .dropdown-menu label:hover {
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+        }
+        .dropdown-menu input[type="file"] { display: none; }
+        .btn-voice {
+            padding: 8px 14px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1.2rem;
+        }
+        .btn-voice:hover { background: rgba(255,255,255,0.15); }
+        .btn-voice.recording { background: rgba(245,87,108,0.3); border-color: #f5576c; animation: pulse 1s infinite; }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(245,87,108,0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(245,87,108,0); }
+            100% { box-shadow: 0 0 0 0 rgba(245,87,108,0); }
+        }
+        iframe { width: 100%; height: 600px; border: none; border-radius: 10px; margin-top: 20px; }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px 0;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.85rem;
+        }
+        .footer span {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        @media (max-width: 600px) {
+            .card { padding: 20px; }
+            h1 { font-size: 1.6rem; }
+            .chat-input textarea { min-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="/">🏠 Home</a>
+            <a href="/about">ℹ️ About</a>
+            <a href="/contact">📧 Contact</a>
+            <a href="/register">📝 Register</a>
+        </nav>
+
+        <div class="card">
+            <h1>{{ course.name }}</h1>
+            <p class="course-info">{{ course.description }}</p>
+
+            <div class="chat-section">
+                <h2>🤖 ASTEGN AI Tutor ({{ course.name }})</h2>
+                <p class="subtitle">Ask me anything about this course! / ስለዚህ ትምህርት ማንኛውንም ጥያቄ ጠይቁኝ!</p>
+
+                <div id="chat-messages">
+                    <p style="color: rgba(255,255,255,0.3);">💬 Conversation will appear here...</p>
+                </div>
+
+                <div class="chat-input">
+                    <textarea id="user-query" placeholder="Ask anything..." rows="1"></textarea>
+                    <button onclick="askAI()" class="btn-purple"><i>📤</i> Send</button>
+                    <div class="dropdown-container">
+                        <button class="btn-plus" id="plusBtn" onclick="togglePlusMenu()">+</button>
+                        <div class="dropdown-menu" id="plusMenu">
+                            <button onclick="newChat()"><i>✨</i> New Chat</button>
+                            <label><i>📤</i> Upload PDF
+                                <input type="file" accept=".pdf" onchange="uploadPDF(event)">
+                            </label>
+                            <label><i>🖼️</i> Upload Image
+                                <input type="file" accept="image/*" onchange="uploadImage(event)">
+                            </label>
+                            <button onclick="clearContext()"><i>🗑️</i> Clear Context</button>
+                        </div>
+                    </div>
+                    <button class="btn-voice" id="voiceBtn" onclick="toggleVoice()" title="Voice Input">🎤</button>
+                </div>
+            </div>
+
+            {% if course.quiz_link %}
+                <iframe src="{{ course.quiz_link }}"></iframe>
+            {% endif %}
+        </div>
+
+        <div class="footer">
+            &copy; 2026 <span>ASTEGN AI</span> | Free AI Tutor for Ethiopian Students & Teachers
+        </div>
+    </div>
+
+    <script>
+        let chatHistory = [];
+
+        function addMessage(role, text) {
+            const container = document.getElementById('chat-messages');
+            if (container.children.length === 1 && container.children[0].style.color === 'rgba(255,255,255,0.3)') {
+                container.innerHTML = '';
+            }
+            const div = document.createElement('div');
+            div.className = role === 'user' ? 'user-msg' : 'ai-msg';
+            if (role === 'ai') {
+                div.innerHTML = '<strong>ASTEGN AI:</strong><br>' + text.replace(/\n/g, '<br>');
+                const downloadBtn = document.createElement('button');
+                downloadBtn.className = 'btn-download';
+                downloadBtn.textContent = '📥 Download Word';
+                downloadBtn.onclick = function() { downloadWord(text); };
+                div.appendChild(downloadBtn);
+            } else {
+                div.innerHTML = '<strong>You:</strong> ' + text;
+            }
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+            chatHistory.push({role, text});
+        }
+
+        function askAI() {
+            const input = document.getElementById('user-query');
+            const query = input.value.trim();
+            if (!query) return alert('Please type a question.');
+            addMessage('user', query);
+            input.value = '';
+            input.style.height = 'auto';
+            addMessage('ai', '⏳ Thinking...');
+            fetch('/ask_ai', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({query: query})
+            })
+            .then(res => res.json())
+            .then(data => {
+                const container = document.getElementById('chat-messages');
+                container.removeChild(container.lastChild);
+                chatHistory.pop();
+                addMessage('ai', data.answer || 'No response.');
+            })
+            .catch(() => {
+                const container = document.getElementById('chat-messages');
+                container.removeChild(container.lastChild);
+                chatHistory.pop();
+                addMessage('ai', '❌ Error: AI not responding.');
+            });
+        }
+
+        document.getElementById('user-query').addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        });
+
+        document.getElementById('user-query').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); askAI(); }
+        });
+
+        function togglePlusMenu() {
+            document.getElementById('plusMenu').classList.toggle('show');
+        }
+        document.addEventListener('click', function(e) {
+            const menu = document.getElementById('plusMenu');
+            const btn = document.getElementById('plusBtn');
+            if (!menu.contains(e.target) && !btn.contains(e.target)) menu.classList.remove('show');
+        });
+
+        function newChat() {
+            document.getElementById('chat-messages').innerHTML = '<p style="color: rgba(255,255,255,0.3);">💬 Conversation will appear here...</p>';
+            chatHistory = [];
+            document.getElementById('plusMenu').classList.remove('show');
+        }
+
+        function uploadPDF(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const formData = new FormData();
+            formData.append('file', file);
+            fetch('/upload', { method: 'POST', body: formData })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) addMessage('ai', '✅ ' + data.message);
+                else addMessage('ai', '❌ ' + data.message);
+            });
+            document.getElementById('plusMenu').classList.remove('show');
+            e.target.value = '';
+        }
+
+        function uploadImage(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const formData = new FormData();
+            formData.append('image', file);
+            fetch('/upload_image', { method: 'POST', body: formData })
+            .then(res => res.json())
+            .then(data => {
+                if (data.error) addMessage('ai', '❌ ' + data.error);
+                else addMessage('ai', '✅ Image uploaded successfully.');
+            });
+            document.getElementById('plusMenu').classList.remove('show');
+            e.target.value = '';
+        }
+
+        function clearContext() {
+            if (confirm('Clear all uploaded context?')) {
+                fetch('/clear_context', { method: 'POST' })
+                .then(() => addMessage('ai', '✅ Context cleared.'));
+                document.getElementById('plusMenu').classList.remove('show');
+            }
+        }
+
+        function toggleVoice() {
+            const voiceBtn = document.getElementById('voiceBtn');
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                return alert('Voice input not supported. Use Chrome.');
+            }
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'en-US';
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.onstart = () => { voiceBtn.classList.add('recording'); };
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                document.getElementById('user-query').value = transcript;
+                voiceBtn.classList.remove('recording');
+                askAI();
+            };
+            recognition.onerror = () => { voiceBtn.classList.remove('recording'); };
+            recognition.onend = () => { voiceBtn.classList.remove('recording'); };
+            recognition.start();
+        }
+
+        function downloadWord(content) {
+            fetch('/download_word', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ content: content, filename: 'ASTEGN_AI_Response' })
+            })
+            .then(response => response.blob())
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'ASTEGN_AI_Response.docx';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(error => {
+                alert('Error downloading document: ' + error.message);
+            });
+        }
+    </script>
+</body>
+</html>

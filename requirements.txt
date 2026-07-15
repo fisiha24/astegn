@@ -1,0 +1,14 @@
+Flask
+Flask-SQLAlchemy
+Flask-Admin
+groq
+duckduckgo-search
+gunicorn
+pdfplumber
+Pillow
+beautifulsoup4
+requests
+python-docx
+sentence-transformers
+faiss-cpu
+numpy

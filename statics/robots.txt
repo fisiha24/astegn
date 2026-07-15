@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /static/uploads/
+Sitemap: https://astegn.onrender.com/sitemap.xml

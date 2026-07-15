@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Plan - ASTEGN AI</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            color: #ffffff;
+        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        nav {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            background: rgba(255,255,255,0.06);
+            padding: 15px 25px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        nav a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: 0.3s;
+            font-size: 0.95rem;
+        }
+        nav a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        nav a.active { background: rgba(79,172,254,0.2); color: #4facfe; }
+        .card {
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #f093fb, #f5576c, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle { color: rgba(255,255,255,0.5); margin-bottom: 25px; }
+        fieldset {
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        legend { font-weight: bold; color: #4facfe; padding: 0 10px; }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .form-grid input, .form-grid textarea {
+            padding: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            font-size: 15px;
+            width: 100%;
+        }
+        .form-grid input::placeholder, .form-grid textarea::placeholder { color: rgba(255,255,255,0.3); }
+        .form-grid input:focus, .form-grid textarea:focus {
+            outline: none;
+            border-color: rgba(79,172,254,0.4);
+            background: rgba(255,255,255,0.08);
+        }
+        .form-grid textarea { resize: vertical; min-height: 60px; }
+        .full-width { grid-column: span 2; }
+        .btn {
+            padding: 14px 30px;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn:hover { transform: scale(1.02); box-shadow: 0 8px 30px rgba(79,172,254,0.3); }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px 0;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.85rem;
+        }
+        .footer span {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        @media (max-width: 700px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+            .card { padding: 20px; }
+            h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="/">🏠 Home</a>
+            <a href="/about">ℹ️ About</a>
+            <a href="/contact">📧 Contact</a>
+            <a href="/register">📝 Register</a>
+        </nav>
+
+        <div class="card">
+            <h1>📋 Daily Lesson Plan</h1>
+            <p class="subtitle">Create a detailed daily lesson plan with all components.</p>
+
+            <form method="POST">
+                <!-- Basic Information -->
+                <fieldset>
+                    <legend>Basic Information</legend>
+                    <div class="form-grid">
+                        <input type="text" name="teacher_name" placeholder="Teacher Name" required>
+                        <input type="text" name="school_name" placeholder="School Name" required>
+                        <input type="number" name="grade" placeholder="Grade" required>
+                        <input type="text" name="section" placeholder="Section" required>
+                        <input type="text" name="subject" placeholder="Subject" required>
+                        <input type="date" name="date" required>
+                        <input type="number" name="unit_number" placeholder="Unit Number" required>
+                        <input type="text" name="lesson_topic" placeholder="Lesson Topic" required>
+                        <input type="text" name="page" placeholder="Page" required>
+                    </div>
+                </fieldset>
+
+                <!-- Rationale & Prerequisites -->
+                <fieldset>
+                    <legend>Rationale & Prerequisites</legend>
+                    <div class="form-grid">
+                        <textarea name="rationale" placeholder="Rationale" class="full-width" rows="2"></textarea>
+                        <textarea name="prerequisites" placeholder="Pre-requisite Knowledge" class="full-width" rows="2"></textarea>
+                        <textarea name="competencies" placeholder="Learning Objectives (list with - )" class="full-width" rows="3"></textarea>
+                    </div>
+                </fieldset>
+
+                <!-- Starter -->
+                <fieldset>
+                    <legend>Starter / Introduction</legend>
+                    <div class="form-grid">
+                        <input type="number" name="starter_time" placeholder="Time (minutes)" required>
+                        <textarea name="starter_teacher" placeholder="Teacher Activities" rows="2"></textarea>
+                        <textarea name="starter_student" placeholder="Student Activities" rows="2"></textarea>
+                        <input type="text" name="starter_method" placeholder="Methodology" required>
+                        <input type="text" name="starter_assessment" placeholder="Assessment" required>
+                        <input type="text" name="starter_aids" placeholder="Teaching Aids" required>
+                    </div>
+                </fieldset>
+
+                <!-- Main Activities -->
+                <fieldset>
+                    <legend>Main Activities</legend>
+                    <div class="form-grid">
+                        <input type="number" name="main_time" placeholder="Time (minutes)" required>
+                        <textarea name="main_teacher" placeholder="Teacher Activities" rows="2"></textarea>
+                        <textarea name="main_student" placeholder="Student Activities" rows="2"></textarea>
+                        <input type="text" name="main_method" placeholder="Methodology" required>
+                        <input type="text" name="main_assessment" placeholder="Assessment" required>
+                        <input type="text" name="main_aids" placeholder="Teaching Aids" required>
+                    </div>
+                </fieldset>
+
+                <!-- Concluding Activities -->
+                <fieldset>
+                    <legend>Concluding Activities</legend>
+                    <div class="form-grid">
+                        <input type="number" name="conclude_time" placeholder="Time (minutes)" required>
+                        <textarea name="conclude_teacher" placeholder="Teacher Activities" rows="2"></textarea>
+                        <textarea name="conclude_student" placeholder="Student Activities" rows="2"></textarea>
+                        <input type="text" name="conclude_method" placeholder="Methodology" required>
+                        <input type="text" name="conclude_assessment" placeholder="Assessment" required>
+                        <input type="text" name="conclude_aids" placeholder="Teaching Aids" required>
+                    </div>
+                </fieldset>
+
+                <!-- Support for Special Needs -->
+                <fieldset>
+                    <legend>Support for Learners with Special Needs</legend>
+                    <div class="form-grid">
+                        <textarea name="slow_learners" placeholder="Slow Learners" class="full-width" rows="2"></textarea>
+                        <textarea name="medium_learners" placeholder="Medium Learners" class="full-width" rows="2"></textarea>
+                        <textarea name="fast_learners" placeholder="Fast Learners" class="full-width" rows="2"></textarea>
+                    </div>
+                </fieldset>
+
+                <!-- Self Assessment -->
+                <fieldset>
+                    <legend>Teacher's Self Assessment</legend>
+                    <textarea name="self_assessment" placeholder="Post-lesson self assessment" style="width:100%; padding:12px; border:1px solid rgba(255,255,255,0.1); border-radius:8px; background:rgba(255,255,255,0.05); color:#fff; font-size:15px; resize:vertical; min-height:80px;"></textarea>
+                </fieldset>
+
+                <button type="submit" class="btn"><i class="fas fa-save"></i> Create Daily Plan</button>
+            </form>
+        </div>
+
+        <div class="footer">
+            &copy; 2026 <span>ASTEGN AI</span> | Free AI Tutor for Ethiopian Students & Teachers
+        </div>
+    </div>
+</body>
+</html>
