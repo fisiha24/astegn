@@ -7,8 +7,8 @@
     <!-- ===== PAGE TITLE ===== -->
     <title>ASTEGN AI - አስጠኝ AI - Free AI Tutor for Ethiopian Students & Teachers</title>
     
-    <!-- ===== GOOGLE SEARCH CONSOLE VERIFICATION ===== -->
-    <meta name="<meta name="google-site-verification" content="iVdrxPp_H9widCqJrWF5dlytsRtlQTqZhmX6SFJPaFY" />" />
+    <!-- ===== GOOGLE SEARCH CONSOLE VERIFICATION (አዲስ) ===== -->
+    <meta name="google-site-verification" content="iVdrxPp_H9widCqJrWF5dlytsRtlQTqZhmX6SFJPaFY" />
     
     <!-- ===== META DESCRIPTION ===== -->
     <meta name="description" content="ASTEGN AI - Free AI tutor for Ethiopian students and teachers. አስጠኝ AI - ለኢትዮጵያ ተማሪዎችና መምህራን ነፃ የ AI አስተማሪ።">
@@ -48,14 +48,12 @@
             color: #ffffff;
         }
 
-        /* ===== CONTAINER ===== */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
 
-        /* ===== HEADER ===== */
         header {
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(12px);
@@ -115,7 +113,6 @@
             border-color: transparent;
         }
 
-        /* ===== FLASH MESSAGES ===== */
         .flash {
             padding: 14px 20px;
             border-radius: 12px;
@@ -136,7 +133,6 @@
             color: #feb2b2;
         }
 
-        /* ===== MAIN CONTENT ===== */
         .main-content {
             background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(10px);
@@ -161,7 +157,6 @@
             margin-bottom: 25px;
         }
 
-        /* ===== CHAT SECTION ===== */
         .chat-section {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 14px;
@@ -184,7 +179,6 @@
             color: rgba(255, 255, 255, 0.9);
         }
 
-        /* ===== CHAT MESSAGES ===== */
         #chat-messages {
             background: rgba(0, 0, 0, 0.25);
             border-radius: 12px;
@@ -263,7 +257,6 @@
             background: #218838;
         }
 
-        /* ===== CHAT INPUT ===== */
         .chat-input {
             display: flex;
             gap: 10px;
@@ -297,7 +290,6 @@
             background: rgba(255, 255, 255, 0.08);
         }
 
-        /* ===== PLUS BUTTON ===== */
         .plus-btn {
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.12);
@@ -320,7 +312,6 @@
             transform: rotate(90deg);
         }
 
-        /* ===== DROPDOWN MENU ===== */
         .dropdown-container {
             position: relative;
             display: inline-block;
@@ -376,7 +367,6 @@
             display: none;
         }
 
-        /* ===== VOICE BUTTON ===== */
         .voice-btn {
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.12);
@@ -411,7 +401,6 @@
             100% { box-shadow: 0 0 0 0 rgba(245, 87, 108, 0); }
         }
 
-        /* ===== SEND BUTTON ===== */
         .send-btn {
             padding: 14px 30px;
             background: linear-gradient(135deg, #4facfe, #00f2fe);
@@ -430,7 +419,6 @@
             box-shadow: 0 8px 30px rgba(79, 172, 254, 0.3);
         }
 
-        /* ===== UPLOAD SECTION ===== */
         .upload-section {
             background: rgba(255, 255, 255, 0.04);
             border-radius: 12px;
@@ -477,7 +465,6 @@
             box-shadow: 0 8px 30px rgba(245, 87, 108, 0.3);
         }
 
-        /* ===== COURSES ===== */
         .courses-section {
             margin-top: 30px;
         }
@@ -541,7 +528,6 @@
             box-shadow: 0 6px 25px rgba(79, 172, 254, 0.3);
         }
 
-        /* ===== FOOTER ===== */
         footer {
             text-align: center;
             color: rgba(255, 255, 255, 0.3);
@@ -558,7 +544,6 @@
             background-clip: text;
         }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
@@ -624,7 +609,6 @@
 
 <div class="container">
 
-    <!-- ===== HEADER ===== -->
     <header>
         <div class="logo">
             <h1>📚 ASTEGN AI - አስጠኝ AI</h1>
@@ -638,7 +622,6 @@
         </nav>
     </header>
 
-    <!-- ===== FLASH MESSAGES ===== -->
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
@@ -647,61 +630,42 @@
         {% endif %}
     {% endwith %}
 
-    <!-- ===== MAIN CONTENT ===== -->
     <div class="main-content">
-
         <h2>Welcome to ASTEGN AI</h2>
         <p>Ask me anything about your subjects, lesson plans, or academic questions.</p>
 
-        <!-- ===== CHAT SECTION ===== -->
         <div class="chat-section">
-
             <div class="chat-header">
                 <h3>💬 Ask ASTEGN AI</h3>
             </div>
 
-            <!-- ===== CHAT MESSAGES ===== -->
             <div id="chat-messages">
                 <p style="color: rgba(255,255,255,0.3);">Start a conversation...</p>
             </div>
 
-            <!-- ===== CHAT INPUT ===== -->
             <div class="chat-input">
                 <textarea id="user-input" placeholder="Ask anything..." 
                     onkeypress="if(event.key==='Enter' && !event.shiftKey) { event.preventDefault(); sendMessage(); }"
                     rows="1"></textarea>
 
-                <!-- ===== + PLUS BUTTON ===== -->
                 <div class="dropdown-container">
                     <button class="plus-btn" id="dropdownToggle" onclick="toggleDropdown()">+</button>
                     <div class="dropdown-menu" id="dropdownMenu">
-                        <button onclick="newChat()">
-                            <span class="icon">✨</span> New Chat
-                        </button>
-                        <label>
-                            <span class="icon">📤</span> Upload PDF
+                        <button onclick="newChat()"><span class="icon">✨</span> New Chat</button>
+                        <label><span class="icon">📤</span> Upload PDF
                             <input type="file" id="pdfUpload" accept=".pdf" onchange="uploadPDF(this)">
                         </label>
-                        <label>
-                            <span class="icon">🖼️</span> Upload Image
+                        <label><span class="icon">🖼️</span> Upload Image
                             <input type="file" id="imageUpload" accept="image/*" onchange="uploadImage(this)">
                         </label>
-                        <button onclick="clearContext()">
-                            <span class="icon">🗑️</span> Clear Context
-                        </button>
+                        <button onclick="clearContext()"><span class="icon">🗑️</span> Clear Context</button>
                     </div>
                 </div>
 
-                <!-- ===== VOICE BUTTON ===== -->
-                <button class="voice-btn" id="voiceBtn" onclick="toggleVoice()" title="Voice Input">
-                    🎤
-                </button>
-
-                <!-- ===== SEND BUTTON ===== -->
+                <button class="voice-btn" id="voiceBtn" onclick="toggleVoice()" title="Voice Input">🎤</button>
                 <button class="send-btn" onclick="sendMessage()">Send</button>
             </div>
 
-            <!-- ===== UPLOAD SECTION ===== -->
             <div class="upload-section" id="uploadSection">
                 <h4>📤 Upload PDF</h4>
                 <form action="/upload" method="POST" enctype="multipart/form-data">
@@ -709,10 +673,8 @@
                     <button type="submit" class="upload-btn">Upload</button>
                 </form>
             </div>
-
         </div>
 
-        <!-- ===== COURSES SECTION ===== -->
         <div class="courses-section">
             <h3>📚 Our Courses</h3>
             <div class="courses-grid">
@@ -729,21 +691,14 @@
                 {% endif %}
             </div>
         </div>
-
     </div>
 
-    <!-- ===== FOOTER ===== -->
     <footer>
         &copy; 2026 <span>ASTEGN AI</span> | Free AI Tutor for Ethiopian Students & Teachers
     </footer>
-
 </div>
 
-<!-- ============================================================ -->
-<!-- JAVASCRIPT -->
-<!-- ============================================================ -->
 <script>
-    // ===== AUTO-EXPAND TEXTAREA =====
     document.addEventListener('DOMContentLoaded', function() {
         const textarea = document.getElementById('user-input');
         textarea.addEventListener('input', function() {
@@ -752,13 +707,10 @@
         });
     });
 
-    // ===== DROPDOWN TOGGLE =====
     function toggleDropdown() {
-        const menu = document.getElementById('dropdownMenu');
-        menu.classList.toggle('show');
+        document.getElementById('dropdownMenu').classList.toggle('show');
     }
 
-    // Close dropdown when clicking outside
     document.addEventListener('click', function(event) {
         const container = document.querySelector('.dropdown-container');
         if (container && !container.contains(event.target)) {
@@ -766,7 +718,6 @@
         }
     });
 
-    // ===== NEW CHAT =====
     function newChat() {
         const messages = document.getElementById('chat-messages');
         messages.innerHTML = `<p style="color: rgba(255,255,255,0.3);">Start a conversation...</p>`;
@@ -777,7 +728,6 @@
         textarea.style.height = '50px';
     }
 
-    // ===== UPLOAD PDF =====
     function uploadPDF(input) {
         const file = input.files[0];
         if (!file) return;
@@ -829,7 +779,6 @@
         });
     }
 
-    // ===== UPLOAD IMAGE =====
     function uploadImage(input) {
         const file = input.files[0];
         if (file) {
@@ -847,7 +796,6 @@
         }
     }
 
-    // ===== VOICE INPUT =====
     let recognition = null;
     let isRecording = false;
 
@@ -901,7 +849,6 @@
         }
     }
 
-    // ===== CLEAR CONTEXT =====
     function clearContext() {
         fetch('/clear_context', { method: 'POST', headers: { 'Content-Type': 'application/json' } })
         .then(response => response.json())
@@ -914,7 +861,6 @@
         });
     }
 
-    // ===== DOWNLOAD WORD =====
     function downloadWord(content) {
         fetch('/download_word', {
             method: 'POST',
@@ -937,7 +883,6 @@
         });
     }
 
-    // ===== SEND MESSAGE =====
     function sendMessage() {
         const input = document.getElementById('user-input');
         const messages = document.getElementById('chat-messages');
